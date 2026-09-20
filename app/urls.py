@@ -3,6 +3,7 @@ from django.urls import path
 from products.views import ProductListCreateView, ProductRetrieveUpdateDestroyView
 from enterprise.views import EnterpriseListCreateView, EnterpriseRetrieveUpdateDestroyView
 from disclosure.views import DisclosureListCreateView, DisclosureRetrieveUpdateDestroyView
+from review.views import ReviewListCreateView, ReviewRetrieveUpdateDestroyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +31,13 @@ urlpatterns = [
     path('disclosure/<int:pk>/',
         DisclosureRetrieveUpdateDestroyView.as_view(),
         name='disclosure-detail-view'),
+
+    path('review/',
+        ReviewListCreateView.as_view(),
+        name='review'),
+
+    path('review/<int:pk>/',
+        ReviewRetrieveUpdateDestroyView.as_view(),
+        name='review-detail-view'),
 
 ]
