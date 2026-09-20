@@ -1,4 +1,6 @@
 from django.db import models
+from products.models import Product
+from enterprise.models import Enterprise
 
 
 SOCIAL_NETWORK_CHOICES = (
@@ -17,6 +19,16 @@ class Disclosure(models.Model):
         choices=SOCIAL_NETWORK_CHOICES
     )
     date = models.DateField(blank=True, null=True)
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.PROTECT,
+        related_name='products',
+        null=True,
+        blank=True
+    )
+
+    enterprise = models.ManyToManyField(Enterprise, related_name='enterprises')
 
     def __str__(self):
         return self.social_network
