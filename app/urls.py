@@ -1,16 +1,16 @@
 from django.contrib import admin
 from django.urls import path
-from products.views import ProductView, ProductDetailView
+from products.views import ProductListCreateView, ProductRetrieveUpdateDestroyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('products/',
-        ProductView.as_view(),
+        ProductListCreateView.as_view(),
         name='products'),
 
     path('products/<int:pk>/',
-        ProductDetailView.as_view(),
+        ProductRetrieveUpdateDestroyView.as_view(),
         name='product-detail-view'),
 
 ]
