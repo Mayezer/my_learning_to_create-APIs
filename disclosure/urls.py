@@ -1,5 +1,5 @@
 from django.urls import path
-from . import DisclosureListCreateView, DisclosureRetrieveUpdateDestroyView
+from .views import DisclosureListCreateView, DisclosureRetrieveUpdateDestroyView
 
 
 urlpatterns = [
