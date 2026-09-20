@@ -1,43 +1,23 @@
 from django.contrib import admin
-from django.urls import path
-from products.views import ProductListCreateView, ProductRetrieveUpdateDestroyView
-from enterprise.views import EnterpriseListCreateView, EnterpriseRetrieveUpdateDestroyView
-from disclosure.views import DisclosureListCreateView, DisclosureRetrieveUpdateDestroyView
-from review.views import ReviewListCreateView, ReviewRetrieveUpdateDestroyView
+
+# Importa duas ferramentas essenciais para criar rotas:
+# 'path': Usada para definir uma URL específica.
+# 'include': Usada para repassar a responsabilidade daquela URL para outro arquivo.
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('products/',
-        ProductListCreateView.as_view(),
-        name='products'),
-
-    path('products/<int:pk>/',
-        ProductRetrieveUpdateDestroyView.as_view(),
-        name='product-detail-view'),
-
-    path('enterprise/',
-        EnterpriseListCreateView.as_view(),
-        name='enterprise'),
-
-    path('enterprise/<int:pk>/',
-        EnterpriseRetrieveUpdateDestroyView.as_view(),
-        name='enterprise-detail-view'),
-
-    path('disclosure/',
-        DisclosureListCreateView.as_view(),
-        name='disclosure'),
-
-    path('disclosure/<int:pk>/',
-        DisclosureRetrieveUpdateDestroyView.as_view(),
-        name='disclosure-detail-view'),
-
-    path('review/',
-        ReviewListCreateView.as_view(),
-        name='review'),
-
-    path('review/<int:pk>/',
-        ReviewRetrieveUpdateDestroyView.as_view(),
-        name='review-detail-view'),
+    # ROTAS DA SUA API (Agrupadas na versão 1)
+    
+    # O 'include' aqui é fantástico para a organização. Em vez de você escrever 
+    # todas as 50 rotas do seu sistema neste único arquivo, você delega isso.
+    # O comando diz: "Se a URL começar com 'api/v1/', vá até o arquivo 'urls.py' 
+    # do aplicativo 'disclosure' (ou enterprise, etc) e veja o resto do caminho lá."
+    path('api/v1/', include('disclosure.urls')),
+    path('api/v1/', include('enterprise.urls')),
+    path('api/v1/', include('products.urls')),
+    path('api/v1/', include('review.urls')),
 
 ]
