@@ -30,3 +30,21 @@ class ProductSerializers(serializers.ModelSerializer):
         # *Nota: Se você quisesse exibir apenas o nome e o preço, você usaria uma 
         # lista assim: fields = ['nome', 'preco']
         fields = '__all__'
+
+    # A intenção aqui é criar uma função que o DRF rode automaticamente 
+    # quando receber os dados do campo 'description'.
+    # O 'value' é o texto que o usuário digitou na descrição.
+    def validate_description(self, value):
+        
+        # A função len() conta o tamanho (length) de algo. 
+        # Aqui, ela está contando quantos caracteres (letras, espaços, números) 
+        # o texto digitado possui. Se for maior que 500...
+        if len(value) > 500:
+            
+            # ... o DRF levanta um erro, bloqueia o salvamento e devolve essa 
+            # mensagem para o usuário.
+            raise serializers.ValidationError('A descrição não pode ter maior que 500 caracteres.')
+        
+        # Se o texto tiver 500 caracteres ou menos, ele passa direto pelo 'if'
+        # e a função retorna o valor validado para que ele seja salvo no banco.
+        return value
