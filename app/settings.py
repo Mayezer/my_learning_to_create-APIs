@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 
+from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,8 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+
     'rest_framework',
+    'rest_framework_simplejwt',
+
+
+    'authentication',
     'products',
     'enterprise',
     'disclosure',
@@ -130,4 +137,29 @@ MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
+}
+
+
+# Configurações globais do Django REST Framework (DRF)
+REST_FRAMEWORK = {
+    
+    # Define o método de autenticação padrão para todas as rotas da API
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        # Exige e valida um Token JWT (JSON Web Token) para identificar o usuário
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+# Dicionário de configurações específicas para personalizar o pacote SimpleJWT
+SIMPLE_JWT = {
+
+    # Define o tempo de validade do "access token" (o token principal usado nas requisições).
+    # Aqui, ele expira rápido (5 minutos) por questões de segurança.
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+
+    # Define o tempo de validade do "refresh token".
+    # É usado para gerar um novo "access token" sem o usuário precisar digitar a senha novamente. Expira em 1 dia.
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }

@@ -15,6 +15,7 @@ urlpatterns = [
     # todas as 50 rotas do seu sistema neste único arquivo, você delega isso.
     # O comando diz: "Se a URL começar com 'api/v1/', vá até o arquivo 'urls.py' 
     # do aplicativo 'disclosure' (ou enterprise, etc) e veja o resto do caminho lá."
+    path('api/v1/', include('authentication.urls')),
     path('api/v1/', include('disclosure.urls')),
     path('api/v1/', include('enterprise.urls')),
     path('api/v1/', include('products.urls')),
