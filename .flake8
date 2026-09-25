@@ -1,0 +1,10 @@
+# Indica o início do bloco de configurações exclusivas da ferramenta Flake8
+[flake8]
+
+# Diz ao Flake8 para NÃO analisar os arquivos que estão dentro da pasta 'venv'.
+# Isso evita que ele perca tempo apontando erros no código das bibliotecas de terceiros que você instalou.
+exclude = venv
+
+# Diz ao Flake8 para silenciar (ignorar) o erro de código "E501".
+# O erro E501 significa "Line too long" (Linha muito longa). Ao ignorar isso, você pode escrever linhas maiores que o padrão padrão de 79 caracteres do PEP 8 sem que o Flake8 reclame.
+ignore = E501
