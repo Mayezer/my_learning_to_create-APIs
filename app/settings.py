@@ -86,7 +86,31 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+# A chave 'default' indica o banco de dados padrão que a aplicação vai usar para salvar e ler as informações.
+    'default':{
+        # 'ENGINE' diz ao Django qual sistema de banco de dados utilizar. 
+        # Neste caso, estamos configurando o PostgreSQL através da biblioteca adaptadora 'psycopg'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg',
+        
+        # 'NAME' é o nome do banco de dados que o projeto vai acessar para armazenar suas tabelas.
+        'NAME': 'learning_docker',
+        
+        # 'USER' é o nome de usuário do banco de dados que possui os privilégios necessários de acesso.
+        'USER': 'postgres',
+        
+        # 'PASSWORD' é a senha correspondente ao usuário acima para fazer a autenticação.
+        'PASSWORD': 'postgres',
+        
+        # 'HOST' indica o endereço de rede onde o servidor do banco de dados está rodando.
+        # Como o projeto utiliza containers (baseado na estrutura do arquivo "Explicação de Código"[cite: 1]), 
+        # nós não usamos "localhost". Em vez disso, usamos o próprio nome do container do banco ("learning_docker_db").
+        'HOST': 'learning_docker_db',
+        
+        # 'PORT' é a porta de comunicação da rede. A porta 5432 é o padrão oficial do PostgreSQL.
+        'PORT': '5432',
+    },
+
+    'dev': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }

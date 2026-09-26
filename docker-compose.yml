@@ -1,0 +1,23 @@
+services:
+
+  learning_docker_web:
+    build: .
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - learning_docker_db
+
+  learning_docker_db:
+    image: postgres:18.6
+    ports:
+      - 5432:5432
+    valumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postegres
+      - POSTGRES_PASSWORK=postgres
+      - POSTEGRES_DB=learning_docker_db
+
+volumes:
+  postgres_data:
